@@ -7,8 +7,8 @@ sg.theme("White")
 
 class IndexView:
     index_key_view = "-INDEX_VIEW-"
-    index_btn_start_client = "-INDEX_BTN_START_CLIENT-"
-    index_btn_start_admin = "-INDEX_BTN_START_ADMIN-"
+    index_btn_login = "-INDEX_BTN_LOGIN-"
+    index_btn_cadastro = "-INDEX_BTN_CADASTRO-"
 
     def __init__(self):
         pass
@@ -50,20 +50,20 @@ class IndexView:
             )],
 
             [sg.Button(
-                "Cliente",
+                "Login",
                 font="Arial 15",
                 border_width=0,
                 button_color=("White", "Brown"),
-                key=self.index_btn_start_client,
+                key=self.index_btn_login,
                 expand_x=True
             )],
 
             [sg.Button(
-                "Administrador",
+                "Cadastro",
                 font="Arial 15",
                 border_width=0,
                 button_color=("White", "#420B09"),
-                key=self.index_btn_start_admin,
+                key=self.index_btn_cadastro,
                 expand_x=True
             )]
         ], key=self.index_key_view, expand_y=True)

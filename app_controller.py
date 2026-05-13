@@ -9,7 +9,7 @@ class AppController:
     window: sg.Window
     current_page: str
 
-    def __init__(self, current: str, window = None):
+    def __init__(self, current: str, window: sg.Window = None):
         if window is not None:
             self.window = window
 
@@ -38,11 +38,16 @@ class AppController:
         error_window.close()
 
 
-render_layouts = [[
+render_layouts = [
+    [sg.VPush()],
+    [
     IndexView().render(),
     LoginView().render()
-]]
+    ],
+    [sg.VPush()]
+]
 
-window = sg.Window("Hamburgueria", render_layouts)
+window = sg.Window("Hamburgueria", render_layouts, finalize=True, resizable=True, element_justification="center")
+window.maximize()
 
 app = AppController(IndexView.index_key_view, window) # classes subsequentes utilizam o app para controlar a window

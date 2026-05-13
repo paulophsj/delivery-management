@@ -13,7 +13,8 @@ def auth(email, senha):
     )
 
     if find_user == None:
-        return # tratativa de erro posterior
+        app.throw_error("Usuário não encontrado.")
+        return
     
     if find_user["senha"] != senha:
         app.throw_error("Senha incorreta!")

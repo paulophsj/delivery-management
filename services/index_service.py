@@ -14,7 +14,7 @@ class IndexService:
         self.values = values
 
         routes = {
-            IndexView.index_btn_start_admin: lambda: go_to_login
+            IndexView.index_btn_start_admin: lambda: go_to_login()
         }
 
         router_fun = routes.get(events)

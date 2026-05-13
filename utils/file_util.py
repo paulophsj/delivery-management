@@ -1,8 +1,8 @@
 import csv
 
-produtos_path = "../data/produtos.csv"
-users_path = "../data/users.csv"
-vendas_path = "../data/vendas.csv"
+produtos_path = "./data/produtos.csv"
+users_path = "./data/users.csv"
+vendas_path = "./data/vendas.csv"
 
 def load_data(path):
     with open(path, "r", encoding="utf-8") as f:

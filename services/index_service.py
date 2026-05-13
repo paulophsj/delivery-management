@@ -5,7 +5,6 @@ from app_controller import app
 
 
 def go_to_login():
-    print("Entrando em um service")
     app.towards(LoginView.login_key_view)
 
 
@@ -15,7 +14,7 @@ class IndexService:
         self.values = values
 
         routes = {
-            IndexView.index_btn_start_admin: go_to_login
+            IndexView.index_btn_start_admin: lambda: go_to_login
         }
 
         router_fun = routes.get(events)

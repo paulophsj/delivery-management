@@ -2,8 +2,10 @@ import PySimpleGUI as sg
 
 from views.index_view import IndexView
 from views.login_view import LoginView
-from views.error_view import ErrorView
+from views.modal_view import ModalView
 from views.register_view import RegisterView
+
+from enums.modal_type_enum import ModalType
 
 
 class AppController:
@@ -21,12 +23,12 @@ class AppController:
         self.window[towards].update(visible=True)
         self.current_page = towards
 
-    def throw_error(self, message: str):
-        error_window = sg.Window(
-            "Erro",
+    def show_modal(self, message: str, type: ModalType):
+        modal = sg.Window(
+            "Modal",
             [
                 [sg.VPush()],
-                [ErrorView().render(message)],
+                [ModalView().render(message, type)],
                 [sg.VPush()]
             ],
             modal=True,
@@ -34,12 +36,12 @@ class AppController:
         )
 
         while True:
-            event, values = error_window.read()
+            event, values = modal.read()
 
             if event == sg.WINDOW_CLOSED:
                 break
 
-        error_window.close()
+        modal.close()
 
 
 render_layouts = [

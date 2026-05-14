@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 from views.index_view import IndexView
 from views.login_view import LoginView
 from views.error_view import ErrorView
+from views.register_view import RegisterView
 
 
 class AppController:
@@ -23,8 +24,11 @@ class AppController:
     def throw_error(self, message: str):
         error_window = sg.Window(
             "Erro",
-            [[ErrorView().render(message)]],
-            size=(400,100),
+            [
+                [sg.VPush()],
+                [ErrorView().render(message)],
+                [sg.VPush()]
+            ],
             modal=True,
             element_justification="center"
         )
@@ -41,13 +45,20 @@ class AppController:
 render_layouts = [
     [sg.VPush()],
     [
-    IndexView().render(),
-    LoginView().render()
+        IndexView().render(),
+        LoginView().render(),
+        RegisterView().render()
     ],
     [sg.VPush()]
 ]
 
-window = sg.Window("Hamburgueria", render_layouts, finalize=True, resizable=True, element_justification="center")
-window.maximize()
+window = sg.Window(
+    "Hamburgueria",
+    render_layouts,
+    finalize=True,
+    resizable=True,
+    element_justification="center"
+    )
+#window.maximize()
 
 app = AppController(IndexView.index_key_view, window) # classes subsequentes utilizam o app para controlar a window

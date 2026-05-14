@@ -1,6 +1,8 @@
 from views.login_view import LoginView
 from utils.file_util import load_data, users_path
-from utils.user_type_util import UserType
+
+from enums.user_type_enum import UserType
+from enums.modal_type_enum import ModalType
 
 from app_controller import app
 
@@ -13,11 +15,11 @@ def auth(email, senha):
     )
 
     if find_user == None:
-        app.throw_error("Usuário não encontrado.")
+        app.show_modal("Usuário não encontrado.", ModalType.ERRO)
         return
     
     if find_user["senha"] != senha:
-        app.throw_error("Senha incorreta!")
+        app.show_modal("Senha incorreta!", ModalType.ERRO)
         return
     
     if find_user["role"] == UserType.CLIENTE.value:

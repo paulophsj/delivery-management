@@ -2,7 +2,10 @@ import PySimpleGUI as sg
 
 from views.index_view import IndexView
 from views.login_view import LoginView
-from views.error_view import ErrorView
+from views.modal_view import ModalView
+from views.register_view import RegisterView
+
+from enums.modal_type_enum import ModalType
 
 
 class AppController:
@@ -20,34 +23,44 @@ class AppController:
         self.window[towards].update(visible=True)
         self.current_page = towards
 
-    def throw_error(self, message: str):
-        error_window = sg.Window(
-            "Erro",
-            [[ErrorView().render(message)]],
-            size=(400,100),
+    def show_modal(self, message: str, type: ModalType):
+        modal = sg.Window(
+            "Modal",
+            [
+                [sg.VPush()],
+                [ModalView().render(message, type)],
+                [sg.VPush()]
+            ],
             modal=True,
             element_justification="center"
         )
 
         while True:
-            event, values = error_window.read()
+            event, values = modal.read()
 
             if event == sg.WINDOW_CLOSED:
                 break
 
-        error_window.close()
+        modal.close()
 
 
 render_layouts = [
     [sg.VPush()],
     [
-    IndexView().render(),
-    LoginView().render()
+        IndexView().render(),
+        LoginView().render(),
+        RegisterView().render()
     ],
     [sg.VPush()]
 ]
 
-window = sg.Window("Hamburgueria", render_layouts, finalize=True, resizable=True, element_justification="center")
-window.maximize()
+window = sg.Window(
+    "Hamburgueria",
+    render_layouts,
+    finalize=True,
+    resizable=True,
+    element_justification="center"
+    )
+#window.maximize()
 
 app = AppController(IndexView.index_key_view, window) # classes subsequentes utilizam o app para controlar a window

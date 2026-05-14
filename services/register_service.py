@@ -2,7 +2,7 @@ from app_controller import app
 from views.register_view import RegisterView
 
 from utils.file_util import load_data, write_file, users_path
-from utils.user_type_util import UserType
+from enums.user_type_enum import UserType
 
 def register(nome, email, senha, confirmar_senha):
     if not all([nome, email, senha, confirmar_senha]):

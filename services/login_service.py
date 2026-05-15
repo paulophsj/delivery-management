@@ -6,7 +6,13 @@ from enums.modal_type_enum import ModalType
 
 from app_controller import app
 
-def auth(email, senha):
+def auth(email: str, senha: str):
+    if not all([email, senha]):
+        return app.show_modal("Todos os campos devem ser preenchidos", ModalType.ERRO)
+
+    if "@" not in email or ".com" not in email:
+        return app.show_modal("O email deve estar no formato válido", ModalType.ERRO)
+
     users = load_data(users_path)
 
     find_user = next(
@@ -14,7 +20,7 @@ def auth(email, senha):
         None
     )
 
-    if find_user == None:
+    if find_user is None:
         app.show_modal("Usuário não encontrado.", ModalType.ERRO)
         return
     

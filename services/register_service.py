@@ -1,4 +1,5 @@
 from app_controller import app
+from enums.modal_type_enum import ModalType
 from views.register_view import RegisterView
 
 from utils.file_util import load_data, write_file, users_path
@@ -6,7 +7,10 @@ from enums.user_type_enum import UserType
 
 def register(nome, email, senha, confirmar_senha):
     if not all([nome, email, senha, confirmar_senha]):
-        return app.throw_error("Todos os campos devem ser preenchidos.")
+        return app.show_modal("Todos os campos devem ser preenchidos.", ModalType.ERRO)
+
+    if "@" not in email or ".com" not in email:
+        return app.show_modal("O email deve estar no formato válido", ModalType.ERRO)
 
     users = load_data(users_path)
     
@@ -16,13 +20,13 @@ def register(nome, email, senha, confirmar_senha):
     )
 
     if exists_user is not None:
-        return app.throw_error("Já existe um usuário com esse email.")
+        return app.show_modal("Já existe um usuário com esse email.", ModalType.ERRO)
 
     if senha != confirmar_senha:
-        return app.throw_error("As senhas não coincidem.")
+        return app.show_modal("As senhas não coincidem.", ModalType.ERRO)
     
     write_file(users_path, [nome,email,senha,UserType.CLIENTE.value])
-    print("usuário cadastrado com sucesso!")
+    return app.show_modal("Cadastrado com sucesso!", ModalType.SUCESSO)
 
 class RegisterService:
     def __init__(self, events, values):

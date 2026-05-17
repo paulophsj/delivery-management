@@ -1,3 +1,3 @@
-email,senha,role
-user@email.com,123456,CLIENTE
-admin@email.com,123456,ADMIN
+name,email,senha,role
+user,user@email.com,123456,CLIENTE
+admin,admin@email.com,123456,ADMIN

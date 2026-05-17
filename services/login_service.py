@@ -1,4 +1,7 @@
 from views.login_view import LoginView
+from views.dashboard.admin_dashboard_view import AdminDashboardView
+from views.dashboard.client_dashboard_view import ClientDashboardView
+
 from utils.file_util import load_data, users_path
 
 from enums.user_type_enum import UserType
@@ -16,24 +19,24 @@ def auth(email: str, senha: str):
     users = load_data(users_path)
 
     find_user = next(
-        (user for user in users if user["email"] == email),
+        (u for u in users if u["email"] == email),
         None
     )
 
     if find_user is None:
-        app.show_modal("Usuário não encontrado.", ModalType.ERRO)
-        return
+        return app.show_modal("Usuário não encontrado.", ModalType.ERRO)
     
     if find_user["senha"] != senha:
-        app.show_modal("Senha incorreta!", ModalType.ERRO)
-        return
-    
+        return app.show_modal("Senha incorreta!", ModalType.ERRO)
+
+    app.set_user(find_user["name"])
+
     if find_user["role"] == UserType.CLIENTE.value:
-        app.towards("") # rota para cliente
+        return app.towards(ClientDashboardView.dashboard_client_key_view)
     elif find_user["role"] == UserType.ADMIN.value:
-        app.towards("") # rota para administrador
+        return app.towards(AdminDashboardView.dashboard_admin_key_view)
     else:
-        app.towards("") # rota de role nao encontrada
+        return app.towards("") # rota de role nao encontrada
 
 class LoginService:
     def __init__(self, events, values):

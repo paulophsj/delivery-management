@@ -1,9 +1,10 @@
 import PySimpleGUI as sg
 
-from views.router_view import RouterView
+from components.router_component import RouterComponent
+from components.modal_component import ModalComponent
+
 from views.index_view import IndexView
 from views.login_view import LoginView
-from views.modal_view import ModalView
 from views.register_view import RegisterView
 from views.dashboard.admin_dashboard_view import AdminDashboardView
 from views.dashboard.client_dashboard_view import ClientDashboardView
@@ -43,7 +44,7 @@ class AppController:
             "Modal",
             [
                 [sg.VPush()],
-                [ModalView().render(message, type)],
+                [ModalComponent().render(message, type)],
                 [sg.VPush()]
             ],
             modal=True,
@@ -60,7 +61,7 @@ class AppController:
 
 
 render_layouts = [
-    [RouterView().render()],
+    [RouterComponent().render()],
     [sg.VPush()],
     [
         IndexView().render(),

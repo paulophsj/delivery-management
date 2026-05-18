@@ -4,8 +4,8 @@ from config import white_theme
 sg.theme_add_new("White", white_theme)
 sg.theme("White")
 
-class RouterView:
-    router_key_view = "-ROUTER_KEY_VIEW-"
+class RouterComponent:
+    router_key_component = "-ROUTER_KEY_COMPONENT-"
     router_btn_back = "-ROUTER_BTN_BACK-"
     router_btn_forward = "-ROUTER_BTN_FORWARD-"
 
@@ -45,7 +45,7 @@ class RouterView:
                 border_width=0,
                 expand_x=True,
             )]],
-            key=self.router_key_view,
+            key=self.router_key_component,
             element_justification="center",
             expand_x=True,
             expand_y=False,

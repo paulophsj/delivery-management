@@ -1,4 +1,4 @@
-from views.router_view import RouterView
+from components.router_component import RouterComponent
 
 from app_controller import app
 
@@ -27,8 +27,8 @@ class RouterService:
         self.values = values
 
         routes = {
-            RouterView.router_btn_forward: lambda : forwards(),
-            RouterView.router_btn_back: lambda : backwards()
+            RouterComponent.router_btn_forward: lambda : forwards(),
+            RouterComponent.router_btn_back: lambda : backwards()
         }
 
         router_func = routes.get(events)

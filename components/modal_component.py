@@ -5,8 +5,8 @@ from enums.modal_type_enum import ModalType
 sg.theme_add_new("White", white_theme)
 sg.theme("White")
 
-class ModalView:
-    modal_key_view = "-MODAL_KEY_VIEW-"
+class ModalComponent:
+    modal_key_component = "-MODAL_KEY_COMPONENT-"
 
     def __init__(self):
         pass
@@ -23,4 +23,4 @@ class ModalView:
                     justification="center",
                     expand_x=True
                 )]
-        ],key=self.modal_key_view)
+        ],key=self.modal_key_component)

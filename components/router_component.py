@@ -13,28 +13,41 @@ class RouterComponent:
         pass
 
     def render(self):
+        nav_row = sg.Column([
+            [
+                sg.Button(
+                    "←",
+                    key=self.router_btn_back,
+                    font="Arial 18 bold",
+                    button_color=("Brown", "White"),
+                    border_width=0,
+                    pad=(8, 8),
+                ),
 
-        nav_row = [
-            sg.Button(
-                "←",
-                key=self.router_btn_back,
-                font="Arial 18 bold",
-                button_color=("Brown", "White"),
-                border_width=0,
-                pad=(8, 8),
-            ),
-            sg.Push(),
-            sg.Button(
-                "→",
-                key=self.router_btn_forward,
-                font="Arial 18 bold",
-                button_color=("Brown", "White"),
-                border_width=0,
-                pad=(8, 8),
-            ),
-        ]
+                sg.Push(),
 
-        layout = [nav_row]
+                sg.Text(
+                    "🍔 Hamburgueria",
+                    font=("Arial", 30, "bold"),
+                    text_color="Brown",
+                    justification="center",
+                    expand_x=True
+                ),
+
+                sg.Push(),
+
+                sg.Button(
+                    "→",
+                    key=self.router_btn_forward,
+                    font="Arial 18 bold",
+                    button_color=("Brown", "White"),
+                    border_width=0,
+                    pad=(8, 8),
+                )
+            ]
+        ], expand_x=True)
+
+        layout = [[nav_row]]
 
         return sg.Column(
             [[sg.Frame(

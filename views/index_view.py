@@ -38,4 +38,4 @@ class IndexView:
                 key=self.index_btn_cadastro,
                 expand_x=True
             )]
-        ], key=self.index_key_view, expand_y=True)
+        ], key=self.index_key_view, expand_y=True, visible=False)

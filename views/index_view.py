@@ -15,34 +15,6 @@ class IndexView:
 
     def render(self):
         return sg.Column([
-            [sg.Text(
-                "🍔",
-                font=(None, 37),
-                text_color="Brown",
-                justification="center",
-                expand_x=True
-            )],
-
-            [sg.Text(
-                "Hamburgueria",
-                font="Arial 18 bold",
-                text_color="Brown",
-                justification="center",
-                expand_x=True
-            )],
-
-            [sg.Text(
-                "Gerenciador",
-                font="Arial 10",
-                text_color="Black",
-                justification="center",
-                expand_x=True
-            )],
-
-            [sg.HorizontalSeparator(
-                color="Orange",
-                pad=((60, 60), (10, 10))
-            )],
 
             [sg.Text(
                 "Selecione abaixo o seu perfil de acesso para continuar",

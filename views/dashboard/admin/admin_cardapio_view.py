@@ -11,6 +11,8 @@ sg.theme("White")
 
 class AdminCardapioView:
     admin_cardapio_key_view = "-ADMIN_CARDAPIO_KEY_VIEW-"
+    admin_cardapio_input_pesquisa = "-ADMIN_CARDAPIO_INPUT_PESQUISA-"
+    admin_cardapio_id_produto = staticmethod(lambda id: f"-ADMIN_CARDAPIO_ID_PRODUTO_{id}-")
 
     def __init__(self):
         self._load_produtos()
@@ -31,36 +33,48 @@ class AdminCardapioView:
         CARD_WIDTH = 500
 
         elements = [
-            sg.Frame("", [
-                [
-                    sg.Column([
-                        [sg.Text(p.get("nome_produto"), size=(25, 1), font=("Any", 11, "bold"))],
-                        [sg.Multiline(
-                            p.get("descricao", ""),
-                            size=(100, 3),
-                            disabled=True,
-                            no_scrollbar=True,
-                            border_width=0,
-                            background_color=sg.theme_background_color()
-                        )],
-                        [
-                            sg.Text("R$" + p.get("preco_produto").replace(".", ","), font=("Any", 10, "overstrike")),
-                            sg.Text("R$" + p.get("preco_promocional").replace(".", ","), text_color="green",
-                                    font=("Any", 15, "bold"))
-                        ] if p.get("preco_promocional") else [
-                            sg.Text("R$" + p.get("preco_produto").replace(".", ","), text_color="green",
-                                    font=("Any", 15, "bold"))
-                        ]
-                    ], size=(CARD_WIDTH, 150), vertical_alignment="center", expand_y=True),
-                    sg.Column([
-                        [sg.Image(data=img)]
-                    ], vertical_alignment="center")
-                ]
-            ], relief=sg.RELIEF_SOLID, border_width=1)
+            sg.pin(
+                sg.Frame("", [
+                    [
+                        sg.Column([
+                            [sg.Text(p.get("nome_produto"), size=(25, 1), font=("Any", 11, "bold"))],
+                            [sg.Multiline(
+                                p.get("descricao", ""),
+                                size=(100, 3),
+                                disabled=True,
+                                no_scrollbar=True,
+                                border_width=0,
+                                background_color=sg.theme_background_color()
+                            )],
+                            [
+                                sg.Text("R$" + p.get("preco_produto").replace(".", ","),
+                                        font=("Any", 10, "overstrike")),
+                                sg.Text("R$" + p.get("preco_promocional").replace(".", ","), text_color="green",
+                                        font=("Any", 15, "bold"))
+                            ] if p.get("preco_promocional") else [
+                                sg.Text("R$" + p.get("preco_produto").replace(".", ","), text_color="green",
+                                        font=("Any", 15, "bold"))
+                            ]
+                        ], size=(CARD_WIDTH, 150), vertical_alignment="center", expand_y=True),
+                        sg.Column([
+                            [sg.Image(data=img)]
+                        ], vertical_alignment="center")
+                    ]
+                ],
+                         relief=sg.RELIEF_SOLID, border_width=1,
+                         key=AdminCardapioView.admin_cardapio_id_produto(p.get("id_produto")))
+
+            )
             for img, p in zip(self._images, self._produtos)
             if img and p
         ]
 
         rows = [elements[i:i + 2] for i in range(0, len(elements), 2)]
 
-        return sg.Column(rows, scrollable=True, expand_y=True, visible=False, vertical_scroll_only=True, key=self.admin_cardapio_key_view)
+        return sg.Column([
+            [
+                sg.Text("Pesquise pelo nome: "),
+                sg.Input(key=self.admin_cardapio_input_pesquisa, enable_events=True)
+            ],
+            *rows
+        ], scrollable=True, expand_y=True, visible=True, vertical_scroll_only=True, key=self.admin_cardapio_key_view)

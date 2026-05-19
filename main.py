@@ -3,6 +3,7 @@ from services.index_service import IndexService
 from services.login_service import LoginService
 from services.register_service import RegisterService
 from services.router_service import RouterService
+from services.dashboard_services.admin_dashboard_service import AdminDashboardService
 import PySimpleGUI as sg
 
 while True:
@@ -23,5 +24,8 @@ while True:
 
         case e if e.startswith("-REGISTER"):
             RegisterService(events, values)
+
+        case e if e.startswith("-DASHBOARD_ADMIN"):
+            AdminDashboardService(events, values)
 
 app.window.close()

@@ -8,6 +8,7 @@ from views.login_view import LoginView
 from views.register_view import RegisterView
 from views.dashboard.admin_dashboard_view import AdminDashboardView
 from views.dashboard.client_dashboard_view import ClientDashboardView
+from views.dashboard.admin.admin_cardapio_view import AdminCardapioView
 
 from enums.modal_type_enum import ModalType
 
@@ -68,7 +69,8 @@ render_layouts = [
         LoginView().render(),
         RegisterView().render(),
         AdminDashboardView().render(),
-        ClientDashboardView().render()
+        ClientDashboardView().render(),
+        AdminCardapioView().render()
     ],
     [sg.VPush()]
 ]
@@ -82,4 +84,4 @@ window = sg.Window(
     )
 window.maximize()
 
-app = AppController(IndexView.index_key_view, window) # classes subsequentes utilizam o app para controlar a window
+app = AppController(IndexView.index_key_view, window)

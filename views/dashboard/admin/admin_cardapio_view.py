@@ -63,4 +63,4 @@ class AdminCardapioView:
 
         rows = [elements[i:i + 2] for i in range(0, len(elements), 2)]
 
-        return sg.Column(rows, scrollable=True, expand_y=True, visible=True, vertical_scroll_only=True)
+        return sg.Column(rows, scrollable=True, expand_y=True, visible=False, vertical_scroll_only=True)

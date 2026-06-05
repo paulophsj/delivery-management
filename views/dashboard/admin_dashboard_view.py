@@ -8,8 +8,9 @@ class AdminDashboardView:
     dashboard_admin_key_view = "-DASHBOARD_ADMIN_KEY_VIEW-"
     dashboard_admin_btn_pedidos = "-DASHBOARD_ADMIN_BTN_PEDIDOS-"
     dashboard_admin_btn_cardapio = "-DASHBOARD_ADMIN_BTN_CARDAPIO-"
-    dashboard_admin_btn_hamburgueria = "-DASHBOARD_ADMIN_BTN_HAMBURGUERIA-"
+    dashboard_admin_btn_perfil = "-DASHBOARD_ADMIN_BTN_PERFIL-"
     dashboard_admin_txt_nome = "-DASHBOARD_ADMIN_TXT_NOME-"
+    dashboard_admin_txt_saldo = "-DASHBOARD_ADMIN_TXT_SALDO-"
 
     def __init__(self):
         pass
@@ -22,7 +23,12 @@ class AdminDashboardView:
                          font="Arial 18 bold",
                          pad=(0, (0, 4)),
                          key=self.dashboard_admin_txt_nome)],
-                [sg.Text("O que deseja fazer hoje?", pad=(0, (0, 24)))],
+                [sg.Text("O que deseja fazer hoje?", pad=(0, (0, 8)))],
+                [sg.Text("💰 Saldo disponível: R$ 0,00",
+                         font="Arial 13 bold",
+                         text_color="green",
+                         pad=(0, (0, 24)),
+                         key=self.dashboard_admin_txt_saldo)],
             ], element_justification="center", expand_x=True)],
         ]
 
@@ -44,8 +50,8 @@ class AdminDashboardView:
                           font=btn_font,
                           button_color=btn_color,
                           pad=(12, 0)),
-                sg.Button("🏠\nGerenciar\nHamburgueria",
-                          key=self.dashboard_admin_btn_hamburgueria,
+                sg.Button("👤\nGerenciar\nPerfil",
+                          key=self.dashboard_admin_btn_perfil,
                           size=btn_size,
                           font=btn_font,
                           button_color=btn_color,

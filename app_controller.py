@@ -12,12 +12,15 @@ from views.dashboard.admin.admin_cardapio_view import AdminCardapioView
 
 from enums.modal_type_enum import ModalType
 
+from utils.layout_util import fill_scrollable_width
+
 
 class AppController:
     window: sg.Window
     current_page: str
     routing: list[str]
     routing_index: int
+    current_user: dict
 
     def __init__(self, current: str, window: sg.Window = None):
         if window is not None:
@@ -26,6 +29,7 @@ class AppController:
         self.current_page = current
         self.routing = [current]
         self.routing_index = 0
+        self.current_user = None
 
     def towards(self, towards: str):
         self.routing = self.routing[:self.routing_index + 1]
@@ -39,6 +43,14 @@ class AppController:
     def set_user(self, nome: str):
         self.window[AdminDashboardView.dashboard_admin_txt_nome].update(f"Olá, {nome}!")
         self.window[ClientDashboardView.dashboard_client_txt_nome].update(f"Olá, {nome}!")
+
+    def refresh_admin_saldo(self):
+        from utils.file_util import load_data, vendas_path
+        vendas = load_data(vendas_path)
+        total = sum(float(v.get("total") or 0) for v in vendas)
+        self.window[AdminDashboardView.dashboard_admin_txt_saldo].update(
+            f"💰 Saldo disponível: R$ {total:.2f}".replace(".", ",")
+        )
 
     def show_modal(self, message: str, type: ModalType):
         modal = sg.Window(
@@ -83,5 +95,7 @@ window = sg.Window(
     element_justification="center"
     )
 window.maximize()
+
+fill_scrollable_width(window[AdminCardapioView.admin_cardapio_key_view])
 
 app = AppController(IndexView.index_key_view, window)

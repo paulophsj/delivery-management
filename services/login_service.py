@@ -29,11 +29,13 @@ def auth(email: str, senha: str):
     if find_user["senha"] != senha:
         return app.show_modal("Senha incorreta!", ModalType.ERRO)
 
+    app.current_user = find_user
     app.set_user(find_user["name"])
 
     if find_user["role"] == UserType.CLIENTE.value:
         return app.towards(ClientDashboardView.dashboard_client_key_view)
     elif find_user["role"] == UserType.ADMIN.value:
+        app.refresh_admin_saldo()
         return app.towards(AdminDashboardView.dashboard_admin_key_view)
     else:
         return app.towards("") # rota de role nao encontrada

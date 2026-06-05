@@ -1,0 +1,2 @@
+id_venda,cliente_email,cliente_nome,itens,total,status,data
+1,user@email.com,user,"[{""id_produto"": ""1"", ""nome"": ""Hamburguer Clássico"", ""qtd"": 1, ""preco"": 15.9, ""obs"": """"}, {""id_produto"": ""1"", ""nome"": ""Hamburguer Clássico"", ""qtd"": 1, ""preco"": 15.9, ""obs"": """"}, {""id_produto"": ""2"", ""nome"": ""Cheeseburguer"", ""qtd"": 1, ""preco"": 17.5, ""obs"": """"}]",49.30,ENTREGUE,2026-06-02 08:22

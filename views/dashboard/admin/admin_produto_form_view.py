@@ -1,9 +1,12 @@
 import PySimpleGUI as sg
 
 from config import white_theme
+from app_controller import app
 
 sg.theme_add_new("White", white_theme)
 sg.theme("White")
+
+from enums.modal_type_enum import ModalType
 
 
 class AdminProdutoFormView:
@@ -75,20 +78,20 @@ class AdminProdutoFormView:
                 url = values[AdminProdutoFormView.form_input_url].strip()
 
                 if not all([nome, preco, url]):
-                    sg.popup_error("Nome, preço e URL da imagem são obrigatórios.")
+                    app.show_modal("Nome, preço e URL da imagem são obrigatórios.", ModalType.ERRO)
                     continue
 
                 try:
                     float(preco)
                 except ValueError:
-                    sg.popup_error("O preço deve ser um número válido (ex: 19.90).")
+                    app.show_modal("O preço deve ser um número válido (ex: 19.90).", ModalType.ERRO)
                     continue
 
                 if promocional:
                     try:
                         float(promocional)
                     except ValueError:
-                        sg.popup_error("O preço promocional deve ser um número válido.")
+                        app.show_modal("O preço promocional deve ser um número válido.", ModalType.ERRO)
                         continue
 
                 resultado = {

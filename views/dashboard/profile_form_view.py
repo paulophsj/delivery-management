@@ -1,9 +1,12 @@
 import PySimpleGUI as sg
+from app_controller import app
 
 from config import white_theme
 
 sg.theme_add_new("White", white_theme)
 sg.theme("White")
+
+from enums.modal_type_enum import ModalType
 
 
 class ProfileFormView:
@@ -58,7 +61,7 @@ class ProfileFormView:
                 senha = values[ProfileFormView.profile_input_senha].strip()
 
                 if not all([nome, senha]):
-                    sg.popup_error("Nome e senha são obrigatórios.")
+                    app.show_modal("Nome e senha são obrigatórios.", ModalType.ERRO)
                     continue
 
                 resultado = {"name": nome, "senha": senha}

@@ -109,7 +109,7 @@ def abrir_pedido(cliente):
 
         if event == ClientCardapioView.client_cardapio_btn_finalizar:
             if not carrinho:
-                sg.popup_error("Adicione ao menos um item ao carrinho.")
+                app.show_modal("Adicione ao menos um item ao carrinho.", ModalType.ERRO)
                 continue
 
             _finalizar_pedido(carrinho, cliente)
@@ -132,7 +132,7 @@ def abrir_pedido(cliente):
                 qtd = 0
 
             if qtd < 1:
-                sg.popup_error("Informe uma quantidade válida (mínimo 1).")
+                app.show_modal("Informe uma quantidade válida (mínimo 1).", ModalType.ERRO)
                 continue
 
             carrinho.append({
